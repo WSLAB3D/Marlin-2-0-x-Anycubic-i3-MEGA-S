@@ -46,6 +46,10 @@
   #define Y_MIN_PIN                           19
 #endif
 
+#if ENABLED(WSLAB3D_PROBE_ZHOME_ALIGN)
+  #define Z_MIN_PIN                           2
+#endif
+
 // Labeled pins
 #define TG_HEATER_BED_PIN                      8
 #define TG_HEATER_0_PIN                       10
