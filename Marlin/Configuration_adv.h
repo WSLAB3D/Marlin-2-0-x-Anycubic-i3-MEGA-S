@@ -486,6 +486,18 @@
 
 // @section extras
 
+// WSLAB3D Customisations
+#if ENABLED(WSLAB3D_BABYSTEP)
+    #define BABYSTEP_ALWAYS_AVAILABLE
+    #define BABYSTEP_ZPROBE_OFFSET
+#endif
+
+#if ENABLED(WSLAB3D_PROBE_ZHOME_ALIGN)
+    #define Z_STEPPER_AUTO_ALIGN
+#endif
+
+
+
 //#define Z_LATE_ENABLE // Enable Z the last moment. Needed if your Z driver overheats.
 
 // Employ an external closed loop controller. Override pins here if needed.
@@ -1499,14 +1511,19 @@
   //#define BABYSTEP_WITHOUT_HOMING
   //#define BABYSTEP_XY                     // Also enable X/Y Babystepping. Not supported on DELTA!
   #define BABYSTEP_INVERT_Z false           // Change if Z babysteps should go the other way
-  #define BABYSTEP_MULTIPLICATOR_Z  10       // Babysteps are very small. Increase for faster motion. //WSLAB3D 18.03.2021//increased 1 to 10
+  #if ENABLED(WSLAB3D_BABYSTEP)
+    #define BABYSTEP_MULTIPLICATOR_Z  10       // Babysteps are very small. Increase for faster motion. //WSLAB3D 18.03.2021//increased 1 to 10
+  #endif
+  #if ENABLED(WSLAB3D_BABYSTEP)
+    #define BABYSTEP_MULTIPLICATOR_Z  1       // Babysteps are very small. Increase for faster motion.
+  #endif
   #define BABYSTEP_MULTIPLICATOR_XY 1
 
   //#define DOUBLECLICK_FOR_Z_BABYSTEPPING  // Double-click on the Status Screen for Z Babystepping.
   #if ENABLED(DOUBLECLICK_FOR_Z_BABYSTEPPING)
     #define DOUBLECLICK_MAX_INTERVAL 1250   // Maximum interval between clicks, in milliseconds.
                                             // Note: Extra time may be added to mitigate controller latency.
-    #define BABYSTEP_ALWAYS_AVAILABLE     // Allow babystepping at all times (not just during movement). //WSLAB3D 18.03.2021//enable
+    //#define BABYSTEP_ALWAYS_AVAILABLE     // Allow babystepping at all times (not just during movement). //WSLAB3D 18.03.2021//enable
     //#define MOVE_Z_WHEN_IDLE              // Jump to the move Z menu on doubleclick when printer is idle.
     #if ENABLED(MOVE_Z_WHEN_IDLE)
       #define MOVE_Z_IDLE_MULTIPLICATOR 1   // Multiply 1mm by this factor for the move step size.
@@ -1515,7 +1532,7 @@
 
   //#define BABYSTEP_DISPLAY_TOTAL          // Display total babysteps since last G28
 
-  #define BABYSTEP_ZPROBE_OFFSET          // Combine M851 Z and Babystepping //WSLAB3D 18.03.2021//enable
+  //#define BABYSTEP_ZPROBE_OFFSET          // Combine M851 Z and Babystepping //WSLAB3D 18.03.2021//enable
   #if ENABLED(BABYSTEP_ZPROBE_OFFSET)
     //#define BABYSTEP_HOTEND_Z_OFFSET      // For multiple hotends, babystep relative Z offsets
     //#define BABYSTEP_ZPROBE_GFX_OVERLAY   // Enable graphical overlay on Z-offset editor

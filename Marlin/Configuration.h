@@ -98,6 +98,13 @@
  */
 //#define KNUTWURST_ONE_Z_ENDSTOP   // DO NOT UNCOMMENT! USE PLATFORMIO TO BUILD THE FW FOR YOUR PRINTER!
 
+#if ENABLED(WSLAB3D_PROBE_ZHOME_ALIGN)
+    #define KNUTWURST_ONE_Z_ENDSTOP
+    #define ENDSTOPPULLDOWN_ZMIN_PROBE
+    #define Z_MIN_PROBE_USES_Z_MIN_ENDSTOP_PIN
+    #define Z_SAFE_HOMING
+#endif
+
 /*
  * If you have defined the MEGA_X or if
  * you have the "new" Mega S with the blue/yellow
@@ -846,7 +853,13 @@
     // Mechanical endstop with COM to ground and NC to Signal uses "false" here (most common setup).
     #define X_MIN_ENDSTOP_INVERTING true // set to true to invert the logic of the endstop.
     #define Y_MIN_ENDSTOP_INVERTING false // set to true to invert the logic of the endstop.
-    #define Z_MIN_ENDSTOP_INVERTING true // set to true to invert the logic of the endstop.
+    #if ENABLED(WSLAB3D_PROBE_ZHOME_ALIGN)
+        #define Z_MIN_ENDSTOP_INVERTING false // set to true to invert the logic of the endstop.
+        #define Z_MIN_PROBE_ENDSTOP_INVERTING true // set to true to invert the logic of the endstop.
+    #endif
+    #if DISABLED(WSLAB3D_PROBE_ZHOME_ALIGN)
+        #define Z_MIN_ENDSTOP_INVERTING true // set to true to invert the logic of the endstop.
+    #endif
     #define X_MAX_ENDSTOP_INVERTING true // set to true to invert the logic of the endstop.
     #define Y_MAX_ENDSTOP_INVERTING true // set to true to invert the logic of the endstop.
     #define Z_MAX_ENDSTOP_INVERTING true // set to true to invert the logic of the endstop.
@@ -1313,9 +1326,13 @@
  *
  * Specify a Probe position as { X, Y, Z }
  */
-#if ENABLED(KNUTWURST_BLTOUCH)
-    #define NOZZLE_TO_PROBE_OFFSET { -2, -25, 0 } //https://www.thingiverse.com/thing:2824005
-    //#define NOZZLE_TO_PROBE_OFFSET { 29, -15, 0 } //X-Carriage
+#if ENABLED(KNUTWURST_BLTOUCH) //WSLAB3D - Handling for MK4 X-Carriage
+    #if ENABLED(WSLAB_MK4_XCARRIAGE)
+      #define NOZZLE_TO_PROBE_OFFSET { 29, -15, 0 } //MK4 X-Carriage
+    #endif
+    #if DISABLED(WSLAB_MK4_XCARRIAGE)
+      #define NOZZLE_TO_PROBE_OFFSET { -2, -25, 0 } //https://www.thingiverse.com/thing:2824005
+    #endif
 #endif
 
 #if DISABLED(KNUTWURST_BLTOUCH)
