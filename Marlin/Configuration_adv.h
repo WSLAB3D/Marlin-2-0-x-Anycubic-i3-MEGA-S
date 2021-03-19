@@ -1514,7 +1514,7 @@
   #if ENABLED(WSLAB3D_BABYSTEP)
     #define BABYSTEP_MULTIPLICATOR_Z  10       // Babysteps are very small. Increase for faster motion. //WSLAB3D 18.03.2021//increased 1 to 10
   #endif
-  #if ENABLED(WSLAB3D_BABYSTEP)
+  #if DISABLED(WSLAB3D_BABYSTEP)
     #define BABYSTEP_MULTIPLICATOR_Z  1       // Babysteps are very small. Increase for faster motion.
   #endif
   #define BABYSTEP_MULTIPLICATOR_XY 1
