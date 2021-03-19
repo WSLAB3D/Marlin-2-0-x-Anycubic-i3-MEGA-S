@@ -1,4 +1,4 @@
-##### WSLAB3D Customisation of Knutwursts great Marlin Firmware!
+# WSLAB3D Customisation of Knutwursts great Marlin Firmware!
 
 includes the following customisation options (Currently in testing, and supports BLTouch and v1.0 board only) for MBL keep using the original:
 Knutwurst firmware equivalency: v1.1.9 - 19 March 2021
