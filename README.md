@@ -1,3 +1,15 @@
+##### WSLAB3D Customisation of Knutwursts great Marlin Firmware!
+
+includes the following customisation options (Currently in testing, and supports BLTouch and v1.0 board only) for MBL keep using the original:
+Knutwurst firmware equivalency: v1.1.9 - 19 March 2021
+- MEGA_X_BLT_10_WSLAB3D
+  - configures BLTouch probe offset for MK4 X-Carriage
+  - modifies Babystepping behaviour to support integration with M851
+- MEGA_X_BLT_10_WSLAB3D_PROBE_ALIGN_Z
+  - same changes as above, plus;
+  - removes z-endstops and instead homes z axis with BLTouch, uses BLtouch to align z-steppers
+
+
 # Knutwurst's i3 MEGA (M/S/P/X) Firmware <br>(based on Marlin 2.0.x)
 
 <span style="color: red;">(BITTE GENAU DURCHLESEN! / PLEASE READ CAREFULLY!)</span>
